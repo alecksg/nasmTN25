@@ -38,6 +38,7 @@ section .bss
     name_input resb 100
     age_input resb 4
     yearlvl_input resb 2
+
     name_len resd 1
     age_len resd 1
 
@@ -46,14 +47,14 @@ section .text
 
 _start:
 
-; Ask for name
+    ; Ask for name
     mov eax, 4
     mov ebx, 1
     mov ecx, name
     mov edx, namelen
     int 0x80
 
-; Read name
+    ; Read name
     mov eax, 3
     mov ebx, 0
     mov ecx, name_input
@@ -64,35 +65,40 @@ _start:
     mov [name_len], eax
 
 
-; Ask for age
+    ; Ask for age
     mov eax, 4
     mov ebx, 1
     mov ecx, age
     mov edx, agelen
     int 0x80
 
-; Read age
+    ; Read age
     mov eax, 3
     mov ebx, 0
     mov ecx, age_input
     mov edx, 4
     int 0x80
 
-; Ask for yearlvl
+    dec eax
+    mov [age_len], eax
+
+
+    ; Ask for year level
     mov eax, 4
     mov ebx, 1
     mov ecx, yearlvl
     mov edx, yearlvl_len
     int 0x80
 
-; Read yearlvl
+    ; Read year level
     mov eax, 3
     mov ebx, 0
     mov ecx, yearlvl_input
     mov edx, 2
     int 0x80
 
-; Display Hello <name>
+
+    ; Display Hello <name>
     mov eax, 4
     mov ebx, 1
     mov ecx, msg1
@@ -111,7 +117,8 @@ _start:
     mov edx, 1
     int 0x80
 
-; Display You are <age> years old
+
+    ; Display You are <age> years old
     mov eax, 4
     mov ebx, 1
     mov ecx, msg2
@@ -130,7 +137,8 @@ _start:
     mov edx, years_old_len
     int 0x80
 
-; Get the yearlvl character
+
+    ; Check year level
     mov al, [yearlvl_input]
 
     cmp al, '1'
@@ -147,6 +155,7 @@ _start:
 
     jmp invalid
 
+
 Freshman:
     mov eax, 4
     mov ebx, 1
@@ -155,6 +164,7 @@ Freshman:
     int 0x80
 
     jmp exit_program
+
 
 Sophomore:
     mov eax, 4
@@ -165,14 +175,16 @@ Sophomore:
 
     jmp exit_program
 
- Junior:
+
+Junior:
     mov eax, 4
     mov ebx, 1
     mov ecx, junior
     mov edx, juniorlen
     int 0x80
 
-    jmp exit_program 
+    jmp exit_program
+
 
 Senior:
     mov eax, 4
@@ -181,7 +193,8 @@ Senior:
     mov edx, seniorlen
     int 0x80
 
-    jmp exit_program  
+    jmp exit_program
+
 
 invalid:
     mov eax, 4
@@ -189,6 +202,7 @@ invalid:
     mov ecx, invalid_msg
     mov edx, invalidlen
     int 0x80
+
 
 exit_program:
     mov eax, 1

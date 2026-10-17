@@ -32,6 +32,7 @@ section .bss
     name_input resb 100
     age_input resb 4
     gender_input resb 2
+
     name_len resd 1
     age_len resd 1
 
@@ -40,14 +41,14 @@ section .text
 
 _start:
 
-; Ask for name
+    ; Ask for name
     mov eax, 4
     mov ebx, 1
     mov ecx, name
     mov edx, namelen
     int 0x80
 
-; Read name
+    ; Read name
     mov eax, 3
     mov ebx, 0
     mov ecx, name_input
@@ -58,36 +59,40 @@ _start:
     mov [name_len], eax
 
 
-; Ask for age
+    ; Ask for age
     mov eax, 4
     mov ebx, 1
     mov ecx, age
     mov edx, agelen
     int 0x80
 
-; Read age
+    ; Read age
     mov eax, 3
     mov ebx, 0
     mov ecx, age_input
     mov edx, 4
     int 0x80
 
+    dec eax
+    mov [age_len], eax
 
-; Ask for gender
+
+    ; Ask for gender
     mov eax, 4
     mov ebx, 1
     mov ecx, gender
     mov edx, genderlen
     int 0x80
 
-; Read gender
+    ; Read gender
     mov eax, 3
     mov ebx, 0
     mov ecx, gender_input
     mov edx, 2
     int 0x80
 
-; Display Hello <name>
+
+    ; Display Hello " "
     mov eax, 4
     mov ebx, 1
     mov ecx, msg1
@@ -106,7 +111,7 @@ _start:
     mov edx, 1
     int 0x80
 
-; Display You are <age> years old
+    ; Display age
     mov eax, 4
     mov ebx, 1
     mov ecx, msg2
@@ -125,7 +130,7 @@ _start:
     mov edx, years_old_len
     int 0x80
 
-; Get the gender character
+    ; Get the gender character
     mov al, [gender_input]
 
     cmp al, 'M'
