@@ -66,7 +66,7 @@ _start:
     mov edx, 100
     int 0x80
 
-    dec eax
+    dec eax                     ; remove enter
     mov [name_len], eax
 
 ; Ask for student ID
@@ -111,8 +111,8 @@ _start:
     int 0x80
 
 ; Convert grade from ASCII to number
-    mov eax, 0
-    mov ecx, grade_input
+    mov eax, 0                  ;clears eax
+    mov ecx, grade_input        ;input location
     mov edx, [gradeNum_len]
 
 convert_grade:
@@ -123,16 +123,16 @@ convert_grade:
     mov ebx, 0
     mov bl, [ecx]
 
-    cmp ebx, '0'
+    cmp ebx, '0'                ;below 0
     jb invalid_grade_result
 
-    cmp ebx, '9'
+    cmp ebx, '9'                ;above 9
     ja invalid_grade_result
 
-    sub ebx, '0'
+    sub ebx, '0'                ;ascii to number
 
-    imul eax, 10
-    add eax, ebx
+    imul eax, 10                ;eax x 10
+    add eax, ebx                ;add current digit
 
     inc ecx
     dec edx
@@ -141,23 +141,23 @@ convert_grade:
 
 check_grade:
 
-; 0 to 74
+;0 to 74
     cmp eax, 74
     jbe failed_result
 
-; 75 to 79
+;75 to 79
     cmp eax, 79
     jbe passed_result
 
-; 80 to 84
+;80 to 84
     cmp eax, 84
     jbe good_result
 
-; 85 to 89
+;85 to 89
     cmp eax, 89
     jbe very_good_result
 
-; 90 to 100
+;90 to 100
     cmp eax, 100
     jbe excellent_result
 
