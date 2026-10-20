@@ -47,14 +47,14 @@ section .text
 
 _start:
 
-    ; Ask for name
+;Ask for name
     mov eax, 4
     mov ebx, 1
     mov ecx, name
     mov edx, namelen
     int 0x80
 
-    ; Read name
+;Read name
     mov eax, 3
     mov ebx, 0
     mov ecx, name_input
@@ -72,7 +72,7 @@ _start:
     mov edx, agelen
     int 0x80
 
-    ; Read age
+; Read age
     mov eax, 3
     mov ebx, 0
     mov ecx, age_input
@@ -83,7 +83,7 @@ _start:
     mov [age_len], eax
 
 
-    ; Ask for year level
+; Ask for year level
     mov eax, 4
     mov ebx, 1
     mov ecx, yearlvl
@@ -97,8 +97,7 @@ _start:
     mov edx, 2
     int 0x80
 
-
-    ; Display Hello <name>
+; Display Hello " "
     mov eax, 4
     mov ebx, 1
     mov ecx, msg1
@@ -118,7 +117,7 @@ _start:
     int 0x80
 
 
-    ; Display You are <age> years old
+;Display age
     mov eax, 4
     mov ebx, 1
     mov ecx, msg2
@@ -138,7 +137,7 @@ _start:
     int 0x80
 
 
-    ; Check year level
+;Check year level
     mov al, [yearlvl_input]
 
     cmp al, '1'
