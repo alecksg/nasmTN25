@@ -377,7 +377,6 @@ finish_number:
     pop eax
     ret
 
-
 exit_program:
     mov eax, 1
     xor ebx, ebx
