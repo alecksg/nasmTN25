@@ -234,14 +234,14 @@ finish:
     print_text thank_you, thank_you_len
 
 ;close receipt.txt
-    mov eax, 6                  ; sys_close
+    mov eax, 6                  ;sys_close
     mov ebx, [file_desc]
     int 0x80
 
 ;open receipt.txt for reading
-    mov eax, 5                  ; sys_open
+    mov eax, 5                  ;sys_open
     mov ebx, filename
-    mov ecx, 0                  ; read only
+    mov ecx, 0
     mov edx, 0
     int 0x80
 
