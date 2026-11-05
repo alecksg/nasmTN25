@@ -1,0 +1,5 @@
+Receipt
+Plain Rice: Php 5.00
+Plain Rice: Php 5.00
+Fish: Php 35.00
+Pork: Php 50.00
