@@ -58,7 +58,6 @@ section .data
     receipt_title db "Receipt", 10
     receipt_title_len equ $ - receipt_title
 
-; screen and receipt order messages
     plain_rice db "Plain Rice: Php 5.00", 10
     plain_rice_len equ $ - plain_rice
 
